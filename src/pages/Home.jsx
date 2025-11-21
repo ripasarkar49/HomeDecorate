@@ -4,14 +4,14 @@ import ProductCard from "../componets/ProductCard";
 import useProducts from "../hook/UseProoduct";
 
 const Home = () => {
-  const {products,loading,error}=useProducts()
+  const { products, loading, error } = useProducts();
   const featureProducts = products.slice(0, 6);
- 
+
   return (
     <div>
       <div className="flex justify-between py-5 items-center">
         <h2 className="text-3xl font-semibold">Featured Product</h2>
-        <Link className="btn btn-outline " to="/product">
+        <Link className="btn btn-outline " to="/products">
           See All Product
         </Link>
       </div>
