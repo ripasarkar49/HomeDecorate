@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router";
 import ProductCard from "../componets/ProductCard";
 import useProducts from "../hook/UseProoduct";
+import Loading from "../componets/Loading";
 
 const Home = () => {
   const { products, loading, error } = useProducts();
@@ -15,11 +16,15 @@ const Home = () => {
           See All Product
         </Link>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {featureProducts.map((product) => (
-          <ProductCard key={product.id} product={product}></ProductCard>
-        ))}
-      </div>
+      {loading ? (
+        <Loading></Loading>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {featureProducts.map((product) => (
+            <ProductCard key={product.id} product={product}></ProductCard>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

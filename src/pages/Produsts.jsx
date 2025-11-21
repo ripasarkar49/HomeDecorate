@@ -2,18 +2,18 @@ import React, { useState } from "react";
 import { useLoaderData } from "react-router";
 import ProductCard from "../componets/ProductCard";
 import useProducts from "../hook/UseProoduct";
+import Loading from "../componets/Loading";
 
 const Produsts = () => {
   const { products, loading, error } = useProducts();
   const [search, setSearch] = useState("");
-  const term = search.trim().toLocaleLowerCase()
+  const term = search.trim().toLocaleLowerCase();
   const searchedProducts = term
-    ? products.filter(product =>
+    ? products.filter((product) =>
         product.name.toLocaleLowerCase().includes(term)
       )
-    : products
+    : products;
 
-  
   return (
     <div>
       <div className="flex justify-between py-5 items-center">
@@ -26,18 +26,22 @@ const Produsts = () => {
         <label className="input">
           <input
             value={search}
-            onChange={(e) =>setSearch(e.target.value)}
+            onChange={(e) => setSearch(e.target.value)}
             type="search"
             placeholder="search product"
           />
         </label>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {searchedProducts.map((product) => (
-          <ProductCard key={product.id} product={product}></ProductCard>
-        ))}
-      </div>
+      {loading ? (
+        <Loading  count={16} ></Loading>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {searchedProducts.map((product) => (
+            <ProductCard key={product.id} product={product}></ProductCard>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
